@@ -5,6 +5,9 @@ ProDG and Target Manager are required to use the tool<br>
 <br>
 This tool uses the games' R_SetFrameFog function on cod games to load the modules<br>
 If your plugin uses this address, you may experience issues after loading
+<br><br>
+On some games (mostly BO1 and BO2) you may get an error 0x80010004 when loading your  plugin<br>
+Not sure what causes this (not enough memory error) because the same plugin will load fine from eboot
 
 # Features
 - Load and Unload SPRX Modules from games
