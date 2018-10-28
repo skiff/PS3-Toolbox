@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PS3_SPRX_Loader.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Module" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/dev_hdd0/tmp/module.sprx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
