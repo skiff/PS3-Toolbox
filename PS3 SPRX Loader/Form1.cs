@@ -22,10 +22,8 @@ namespace PS3_SPRX_Loader {
             Properties.Settings.Default.Module = textBox1.Text;
             Properties.Settings.Default.Save();
 
-            if(PS3.IsConnected) {
+            if(PS3.IsConnected)
                 RPC.Disable();
-                PS3.DisconnectTarget();
-            }
         }
 
         private void connectToPS3Button_Click(object sender, EventArgs e) {
@@ -34,6 +32,8 @@ namespace PS3_SPRX_Loader {
                     button6.Enabled = true;
                     button2.Enabled = true;
                     button3.Enabled = true;
+                    button1.Enabled = false;
+                    comboBox1.Enabled = true;
                 }
             }
             catch {
@@ -43,11 +43,13 @@ namespace PS3_SPRX_Loader {
 
         private void disconnectFromPS3Button_Click(object sender, EventArgs e) {
             RPC.Disable();
+            PS3.DisconnectTarget();
 
             button6.Enabled = false;
             button2.Enabled = false;
             button3.Enabled = false;
             button1.Enabled = true;
+            comboBox1.Enabled = false;
         }
 
         private void enableRPCButton_Click(object sender, EventArgs e) {

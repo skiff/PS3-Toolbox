@@ -15,6 +15,7 @@ namespace PS3_SPRX_Loader {
         private const uint PLUGIN_TABLE =       0x10060040;
 
         private static bool RPC_ENABLED = false;
+        private static uint RPC_INSTALL_ADDR = 0x0;
         private static byte[] RESTORE_BYTES = new byte[0x13C];
 
         private static byte[] RPC_BYTES = new byte[] {
@@ -127,6 +128,17 @@ namespace PS3_SPRX_Loader {
                 RPC_BYTES[0xFB] = 0x4C;
             }
 
+            else if (address == RPC_ADDRESS.MW3) {
+                RPC_BYTES[0x66] = 0x02;
+                RPC_BYTES[0x67] = 0x2C;
+
+                RPC_BYTES[0xC2] = 0x02;
+                RPC_BYTES[0xC3] = 0x2C;
+
+                RPC_BYTES[0xFA] = 0x02;
+                RPC_BYTES[0xFB] = 0x2C;
+            }
+
             else if(address == RPC_ADDRESS.BO2) {
                 RPC_BYTES[0x66] = 0x02;
                 RPC_BYTES[0x67] = 0xFD;
@@ -142,26 +154,28 @@ namespace PS3_SPRX_Loader {
         public static bool Enable(TMAPI PS3, string game) {
             RPC.PS3 = PS3;
 
-            uint address = RPC_ADDRESS.GetAddress(game);
-            if (address != 0x0) {
-                UpdateRPC(address);
-                if (!RPC_ENABLED) {
-                    PS3.GetMemory(address, RESTORE_BYTES);
+            if (!RPC_ENABLED) {
+                RPC_INSTALL_ADDR = RPC_ADDRESS.GetAddress(game);
+                if (RPC_INSTALL_ADDR != 0x0) {
+                    UpdateRPC(RPC_INSTALL_ADDR);
+               
+                    PS3.GetMemory(RPC_INSTALL_ADDR, RESTORE_BYTES);
 
                     PS3.Ext.WriteUInt32(ENABLE_ADDR, 0x0);
-                    PS3.SetMemory(address, RPC_BYTES);
+                    PS3.SetMemory(RPC_INSTALL_ADDR, RPC_BYTES);
 
                     RPC_ENABLED = true;
+                    return true;
                 }
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
 
         public static void Disable() {
             if(RPC_ENABLED) {
                 PS3.Ext.WriteUInt32(ENABLE_ADDR, 0x0);
-                PS3.SetMemory(RPC_ADDRESS.MW2, RESTORE_BYTES);
+                PS3.SetMemory(RPC_INSTALL_ADDR, RESTORE_BYTES);
 
                 RPC_ENABLED = false;
             }
@@ -243,7 +257,7 @@ namespace PS3_SPRX_Loader {
         public const uint WAW = 0x0;
         public const uint MW2 = 0x38EDE8;
         public const uint BO1 = 0x0;
-        public const uint MW3 = 0x0;
+        public const uint MW3 = 0x3BC990;
         public const uint BO2 = 0x7AA050;
         public const uint GHOST = 0x0;
         public const uint AW = 0x0;
@@ -251,6 +265,9 @@ namespace PS3_SPRX_Loader {
         public static uint GetAddress(string game) {
             if (game.Equals("MW2"))
                 return MW2;
+
+            if (game.Equals("MW3"))
+                return MW3;
 
             if (game.Equals("BO2"))
                 return BO2;

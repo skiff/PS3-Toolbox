@@ -12,6 +12,7 @@ If your plugin uses this address, you may experience issues after loading
 
 # Supported Games
 - Modern Warfare 2 (1.14)
+- Modern Warfare 3 (1.24)
 - Black Ops 2 (1.19)
 
 # Features being added
