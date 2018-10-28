@@ -115,17 +115,47 @@ namespace PS3_SPRX_Loader {
             0x4E, 0x80, 0x00, 0x20 //blr
         };
 
-        public static void Enable(TMAPI PS3) {
+        private static void UpdateRPC(uint address) {
+            if(address == RPC_ADDRESS.MW2) {
+                RPC_BYTES[0x66] = 0x02;
+                RPC_BYTES[0x67] = 0x4C;
+
+                RPC_BYTES[0xC2] = 0x02;
+                RPC_BYTES[0xC3] = 0x4C;
+
+                RPC_BYTES[0xFA] = 0x02;
+                RPC_BYTES[0xFB] = 0x4C;
+            }
+
+            else if(address == RPC_ADDRESS.BO2) {
+                RPC_BYTES[0x66] = 0x02;
+                RPC_BYTES[0x67] = 0xFD;
+
+                RPC_BYTES[0xC2] = 0x02;
+                RPC_BYTES[0xC3] = 0xFD;
+
+                RPC_BYTES[0xFA] = 0x02;
+                RPC_BYTES[0xFB] = 0xFD;
+            }
+        }
+
+        public static bool Enable(TMAPI PS3, string game) {
             RPC.PS3 = PS3;
 
-            if(!RPC_ENABLED) {
-                PS3.GetMemory(RPC_ADDRESS.MW2, RESTORE_BYTES);
+            uint address = RPC_ADDRESS.GetAddress(game);
+            if (address != 0x0) {
+                UpdateRPC(address);
+                if (!RPC_ENABLED) {
+                    PS3.GetMemory(address, RESTORE_BYTES);
 
-                PS3.Ext.WriteUInt32(ENABLE_ADDR, 0x0);
-                PS3.SetMemory(RPC_ADDRESS.MW2, RPC_BYTES);
+                    PS3.Ext.WriteUInt32(ENABLE_ADDR, 0x0);
+                    PS3.SetMemory(address, RPC_BYTES);
 
-                RPC_ENABLED = true;
+                    RPC_ENABLED = true;
+                }
+                return true;
             }
+            return false;
         }
 
         public static void Disable() {
@@ -209,6 +239,23 @@ namespace PS3_SPRX_Loader {
     }
 
     public static class RPC_ADDRESS {
+        public const uint COD4 = 0x0;
+        public const uint WAW = 0x0;
         public const uint MW2 = 0x38EDE8;
+        public const uint BO1 = 0x0;
+        public const uint MW3 = 0x0;
+        public const uint BO2 = 0x7AA050;
+        public const uint GHOST = 0x0;
+        public const uint AW = 0x0;
+
+        public static uint GetAddress(string game) {
+            if (game.Equals("MW2"))
+                return MW2;
+
+            if (game.Equals("BO2"))
+                return BO2;
+
+            return 0x0;
+        }
     }
 }

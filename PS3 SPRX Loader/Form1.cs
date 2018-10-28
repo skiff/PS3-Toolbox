@@ -43,7 +43,6 @@ namespace PS3_SPRX_Loader {
 
         private void disconnectFromPS3Button_Click(object sender, EventArgs e) {
             RPC.Disable();
-            PS3.DisconnectTarget();
 
             button6.Enabled = false;
             button2.Enabled = false;
@@ -52,10 +51,13 @@ namespace PS3_SPRX_Loader {
         }
 
         private void enableRPCButton_Click(object sender, EventArgs e) {
-            RPC.Enable(PS3);
-
-            button4.Enabled = true;
-            button5.Enabled = true;
+            if (RPC.Enable(PS3, comboBox1.Text)) {
+                button4.Enabled = true;
+                button5.Enabled = true;
+            }
+            else {
+                MessageBox.Show("Game is not supported");
+            }
         }
 
         private void disableRPCButton_Click(object sender, EventArgs e) {
