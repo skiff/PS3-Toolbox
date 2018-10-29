@@ -4,10 +4,12 @@ This tool allows you to load SPRX modules into game memory without having to mod
 ProDG and Target Manager are required to use the tool
 <br><br>
 This tool uses a games menu drawing function to load/unload the modules<br>
-This is why when you load and unload your screen goes black for a second
+This is why when you load and unload your screen goes black/freezes for a second
 <br><br>
-On some games (mostly BO1 and BO2) you may get an error 0x80010004 when loading your  plugin<br>
-Not sure what causes this (not enough memory error) because the same plugin will load fine from eboot
+You can look up error codes here: http://www.psdevwiki.com/ps3/Error_Codes
+<br>
+If you get 0x80010004 (out of memory) you can unload cellSsl_Library to allow space for your SPRX<br>
+Only downside to this fix is you cannot go online or play online games with this library unloaded
 
 # Features
 - Load and Unload SPRX Modules from games

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 
 namespace PS3_SPRX_Loader {
     public class RPC {
@@ -122,35 +118,20 @@ namespace PS3_SPRX_Loader {
 
         private static void UpdateRPC(uint address) {
             if(address == RPC_ADDRESS.MW2) {
-                RPC_BYTES[0x66] = 0x02;
                 RPC_BYTES[0x67] = 0x4C;
-
-                RPC_BYTES[0xC2] = 0x02;
                 RPC_BYTES[0xC3] = 0x4C;
-
-                RPC_BYTES[0xFA] = 0x02;
                 RPC_BYTES[0xFB] = 0x4C;
             }
 
             else if (address == RPC_ADDRESS.MW3) {
-                RPC_BYTES[0x66] = 0x02;
                 RPC_BYTES[0x67] = 0x2C;
-
-                RPC_BYTES[0xC2] = 0x02;
                 RPC_BYTES[0xC3] = 0x2C;
-
-                RPC_BYTES[0xFA] = 0x02;
                 RPC_BYTES[0xFB] = 0x2C;
             }
 
             else if(address == RPC_ADDRESS.BO2) {
-                RPC_BYTES[0x66] = 0x02;
                 RPC_BYTES[0x67] = 0xFD;
-
-                RPC_BYTES[0xC2] = 0x02;
                 RPC_BYTES[0xC3] = 0xFD;
-
-                RPC_BYTES[0xFA] = 0x02;
                 RPC_BYTES[0xFB] = 0xFD;
             }
         }
@@ -218,8 +199,8 @@ namespace PS3_SPRX_Loader {
         public const uint WAW = 0x0;
         public const uint MW2 = 0x2539F8;
         public const uint BO1 = 0x0;
-        public const uint MW3 = 0x3BC990;
-        public const uint BO2 = 0x7AA050;
+        public const uint MW3 = 0xE1C58;
+        public const uint BO2 = 0x3708D0;
         public const uint GHOST = 0x0;
         public const uint AW = 0x0;
 

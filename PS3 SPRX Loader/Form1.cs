@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PS3_SPRX_Loader {
@@ -92,7 +86,7 @@ namespace PS3_SPRX_Loader {
                 if (error != 0x0)
                     MessageBox.Show("Load Module Error: 0x" + error.ToString("X"));
 
-                System.Threading.Thread.Sleep(100);
+                Thread.Sleep(100);
 
                 refreshModules();
 
@@ -104,21 +98,23 @@ namespace PS3_SPRX_Loader {
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            uint moduleId = Convert.ToUInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString(), 16);
+            if (e.ColumnIndex == 4) {
+                uint moduleId = Convert.ToUInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString(), 16);
 
-            if (RPC.Enable(comboBox1.Text)) {
-                uint error = RPC.UnloadModule(moduleId);
-                if (error != 0x0)
-                    MessageBox.Show("Unload Module Error: 0x" + error.ToString("X"));
+                if (RPC.Enable(comboBox1.Text)) {
+                    uint error = RPC.UnloadModule(moduleId);
+                    if (error != 0x0)
+                        MessageBox.Show("Unload Module Error: 0x" + error.ToString("X"));
 
-                System.Threading.Thread.Sleep(100);
+                    Thread.Sleep(100);
 
-                refreshModules();
+                    refreshModules();
 
-                RPC.Disable();
-            }
-            else {
-                MessageBox.Show("Game is not supported");
+                    RPC.Disable();
+                }
+                else {
+                    MessageBox.Show("Game is not supported");
+                }
             }
         }
 
@@ -127,7 +123,7 @@ namespace PS3_SPRX_Loader {
             openFileDialog1.Filter = "SPRX Files|*.sprx";
             openFileDialog1.Title = "Select a File";
 
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) {
                 textBox1.Text = openFileDialog1.FileName;
             }
         }
