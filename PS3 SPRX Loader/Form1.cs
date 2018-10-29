@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace PS3_SPRX_Loader {
     public partial class Form1 : Form {
         private static TMAPI PS3 = new TMAPI();
-        private static RPC RPC = new RPC();
+        private static RPC RPC = new RPC(PS3);
 
         public Form1() {
             InitializeComponent();
@@ -33,7 +33,10 @@ namespace PS3_SPRX_Loader {
                     button2.Enabled = true;
                     button3.Enabled = true;
                     button1.Enabled = false;
+
                     comboBox1.Enabled = true;
+
+                    refreshModules();
                 }
             }
             catch {
@@ -53,9 +56,8 @@ namespace PS3_SPRX_Loader {
         }
 
         private void enableRPCButton_Click(object sender, EventArgs e) {
-            if (RPC.Enable(PS3, comboBox1.Text)) {
+            if (RPC.Enable(comboBox1.Text)) {
                 button4.Enabled = true;
-                button5.Enabled = true;
             }
             else {
                 MessageBox.Show("Game is not supported");
@@ -66,14 +68,13 @@ namespace PS3_SPRX_Loader {
             RPC.Disable();
 
             button4.Enabled = false;
-            button5.Enabled = false;
         }
 
         private void refreshModules() {
             dataGridView1.Rows.Clear();
 
             uint[] modules = RPC.GetModules();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < modules.Length; i++) {
                 if (modules[i] != 0x0) {
                     string Name = PS3.GetModuleName(modules[i]);
                     string ID = "0x" + modules[i].ToString("X");
@@ -84,29 +85,26 @@ namespace PS3_SPRX_Loader {
             }
         }
 
-        private void button5_Click(object sender, EventArgs e) => refreshModules();
-
         private void button4_Click(object sender, EventArgs e) {
-            if (RPC.GetModuleCount() < 10) {
-                uint error = RPC.LoadModule(textBox1.Text);
-                if (error != 0x0)
-                    MessageBox.Show("Load Module Error: 0x" + error.ToString("X"));
+            uint error = RPC.LoadModule(textBox1.Text);
+            if (error != 0x0)
+                MessageBox.Show("Load Module Error: 0x" + error.ToString("X"));
 
-                refreshModules();
-            }
-            else {
-                MessageBox.Show("This tool only supports up to 10 modules");
-            }
+            refreshModules();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             uint moduleId = Convert.ToUInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString(), 16);
 
-            uint error = RPC.UnloadModule(moduleId);
-            if (error != 0x0)
-                MessageBox.Show("Unload Module Error: 0x" + error.ToString("X"));
+            if (RPC.RPC_ENABLED) {
+                uint error = RPC.UnloadModule(moduleId);
+                if (error != 0x0)
+                    MessageBox.Show("Unload Module Error: 0x" + error.ToString("X"));
 
-            refreshModules();
+                refreshModules();
+            }
+            else
+                MessageBox.Show("You must enable RPC first");
         }
     }
 }

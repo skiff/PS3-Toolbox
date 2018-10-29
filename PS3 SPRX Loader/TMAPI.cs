@@ -88,10 +88,13 @@ namespace PS3_SPRX_Loader {
         }
 
         public uint ProcessID() {
+            PS3TMAPI.GetProcessList(Target, out Parameters.ProcessIDs);
+            Parameters.ProcessID = Parameters.ProcessIDs[0];
             return Parameters.ProcessID;
         }
 
         public uint[] ProcessIDs() {
+            PS3TMAPI.GetProcessList(Target, out Parameters.ProcessIDs);
             return Parameters.ProcessIDs;
         }
 
@@ -123,6 +126,8 @@ namespace PS3_SPRX_Loader {
         }
 
         public uint[] ModuleIds() {
+            PS3TMAPI.GetModuleList(Target, Parameters.ProcessID, out Parameters.ModuleIDs);
+
             return Parameters.ModuleIDs;
         }
 

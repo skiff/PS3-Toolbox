@@ -14,7 +14,7 @@ namespace PS3_SPRX_Loader {
         private const uint PLUGIN_PATH_ADDR =   0x10060010;
         private const uint PLUGIN_TABLE =       0x10060040;
 
-        private static bool RPC_ENABLED = false;
+        public static bool RPC_ENABLED = false;
         private static uint RPC_INSTALL_ADDR = 0x0;
         private static byte[] RESTORE_BYTES = new byte[0x13C];
 
@@ -116,6 +116,10 @@ namespace PS3_SPRX_Loader {
             0x4E, 0x80, 0x00, 0x20 //blr
         };
 
+        public RPC(TMAPI PS3) {
+            RPC.PS3 = PS3;
+        }
+
         private static void UpdateRPC(uint address) {
             if(address == RPC_ADDRESS.MW2) {
                 RPC_BYTES[0x66] = 0x02;
@@ -151,9 +155,7 @@ namespace PS3_SPRX_Loader {
             }
         }
 
-        public static bool Enable(TMAPI PS3, string game) {
-            RPC.PS3 = PS3;
-
+        public static bool Enable(string game) {
             if (!RPC_ENABLED) {
                 RPC_INSTALL_ADDR = RPC_ADDRESS.GetAddress(game);
                 if (RPC_INSTALL_ADDR != 0x0) {
@@ -188,20 +190,7 @@ namespace PS3_SPRX_Loader {
 
                 Thread.Sleep(100);
 
-                uint error = PS3.Ext.ReadUInt32(MODULE_ERROR_ADDR);
-
-                if (error == 0x0) {
-                    uint moduleId = PS3.Ext.ReadUInt32(MODULE_IDS_ADDR);
-
-                    for (uint start = PLUGIN_TABLE; ; start += 0x4) {
-                        if (PS3.Ext.ReadUInt32(start) == 0x0) {
-                            PS3.Ext.WriteUInt32(start, moduleId);
-                            break;
-                        }
-                    }
-                }
-
-                return error;
+                return PS3.Ext.ReadUInt32(MODULE_ERROR_ADDR);
             }
 
             return 0x0;
@@ -214,41 +203,13 @@ namespace PS3_SPRX_Loader {
 
                 Thread.Sleep(100);
 
-                uint error = PS3.Ext.ReadUInt32(MODULE_ERROR_ADDR);
-
-                if (error == 0x0) {
-                    for (uint start = PLUGIN_TABLE; ; start += 0x4) {
-                        if (PS3.Ext.ReadUInt32(start) == prxId) {
-                            PS3.Ext.WriteUInt32(start, 0x0);
-                            break;
-                        }
-                    }
-                }
-
-                return error;
+                return PS3.Ext.ReadUInt32(MODULE_ERROR_ADDR);
             }
             return 0x0;
         }
 
-        public static int GetModuleCount() {
-            int count = 0;
-
-            for (uint i = 0; i < 10; i++) {
-                if (PS3.Ext.ReadUInt32(PLUGIN_TABLE + (i * 0x4)) != 0x0)
-                    count++;
-            }
-
-            return count;
-        }
-
         public static uint[] GetModules() {
-            uint[] array = new uint[10];
-
-            for (uint i = 0; i < 10; i++) {
-                array[i] = PS3.Ext.ReadUInt32(PLUGIN_TABLE + (i * 0x4));
-            }
-
-            return array;
+            return PS3.ModuleIds();
         }
     }
 

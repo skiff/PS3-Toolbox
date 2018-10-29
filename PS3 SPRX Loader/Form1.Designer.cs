@@ -23,9 +23,9 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ModuleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,7 +37,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -70,7 +69,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(13, 56);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(493, 284);
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridView1.Size = new System.Drawing.Size(511, 284);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -83,8 +83,8 @@
             // 
             // ModuleIdColumn
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ModuleIdColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ModuleIdColumn.DefaultCellStyle = dataGridViewCellStyle10;
             this.ModuleIdColumn.HeaderText = "ID";
             this.ModuleIdColumn.Name = "ModuleIdColumn";
             this.ModuleIdColumn.ReadOnly = true;
@@ -92,16 +92,16 @@
             // 
             // BaseAddrColumn
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.BaseAddrColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.BaseAddrColumn.DefaultCellStyle = dataGridViewCellStyle11;
             this.BaseAddrColumn.HeaderText = "Base Address";
             this.BaseAddrColumn.Name = "BaseAddrColumn";
             this.BaseAddrColumn.ReadOnly = true;
             // 
             // SizeColumn
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SizeColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SizeColumn.DefaultCellStyle = dataGridViewCellStyle12;
             this.SizeColumn.HeaderText = "Size";
             this.SizeColumn.Name = "SizeColumn";
             this.SizeColumn.ReadOnly = true;
@@ -118,7 +118,7 @@
             this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(310, 13);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 36);
+            this.button2.Size = new System.Drawing.Size(104, 36);
             this.button2.TabIndex = 4;
             this.button2.Text = "Enable RPC";
             this.button2.UseVisualStyleBackColor = true;
@@ -127,9 +127,9 @@
             // button3
             // 
             this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(411, 13);
+            this.button3.Location = new System.Drawing.Point(420, 13);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(95, 36);
+            this.button3.Size = new System.Drawing.Size(103, 36);
             this.button3.TabIndex = 5;
             this.button3.Text = "Disable RPC";
             this.button3.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@
             // button4
             // 
             this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(167, 345);
+            this.button4.Location = new System.Drawing.Point(83, 345);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(78, 23);
             this.button4.TabIndex = 6;
@@ -148,22 +148,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(251, 347);
+            this.textBox1.Location = new System.Drawing.Point(167, 347);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 20);
+            this.textBox1.Size = new System.Drawing.Size(278, 20);
             this.textBox1.TabIndex = 7;
             this.textBox1.Text = "/dev_hdd0/tmp/module.sprx";
-            // 
-            // button5
-            // 
-            this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(83, 345);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(78, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Refresh";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -179,7 +168,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(434, 350);
+            this.label1.Location = new System.Drawing.Point(451, 351);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 10;
@@ -198,7 +187,7 @@
             "BO2",
             "GHOST",
             "AW"});
-            this.comboBox1.Location = new System.Drawing.Point(13, 345);
+            this.comboBox1.Location = new System.Drawing.Point(13, 346);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(64, 21);
             this.comboBox1.TabIndex = 11;
@@ -208,11 +197,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 378);
+            this.ClientSize = new System.Drawing.Size(535, 378);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -236,7 +224,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModuleColumn;
