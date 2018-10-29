@@ -8,8 +8,8 @@ This is why when you load and unload your screen goes black/freezes for a second
 <br><br>
 You can look up error codes here: http://www.psdevwiki.com/ps3/Error_Codes
 <br>
-If you get 0x80010004 (out of memory) you can unload cellSsl_Library to allow space for your SPRX<br>
-Only downside to this fix is you cannot go online or play online games with this library unloaded
+If you get 0x80010004 (out of memory) you can unload cellHttp_Library to allow space for your SPRX<br>
+Just make sure if you are going to unload this library you are already signed in and online with the game loaded
 
 # Features
 - Load and Unload SPRX Modules from games

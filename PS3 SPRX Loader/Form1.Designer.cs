@@ -23,9 +23,9 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button4 = new System.Windows.Forms.Button();
@@ -33,13 +33,13 @@
             this.button6 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.button2 = new System.Windows.Forms.Button();
             this.ModuleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModuleIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BaseAddrColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnloadColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,46 +134,6 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // ModuleColumn
-            // 
-            this.ModuleColumn.HeaderText = "Module";
-            this.ModuleColumn.Name = "ModuleColumn";
-            this.ModuleColumn.ReadOnly = true;
-            this.ModuleColumn.Width = 200;
-            // 
-            // ModuleIdColumn
-            // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ModuleIdColumn.DefaultCellStyle = dataGridViewCellStyle19;
-            this.ModuleIdColumn.HeaderText = "ID";
-            this.ModuleIdColumn.Name = "ModuleIdColumn";
-            this.ModuleIdColumn.ReadOnly = true;
-            this.ModuleIdColumn.Width = 70;
-            // 
-            // BaseAddrColumn
-            // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.BaseAddrColumn.DefaultCellStyle = dataGridViewCellStyle20;
-            this.BaseAddrColumn.HeaderText = "Entry";
-            this.BaseAddrColumn.Name = "BaseAddrColumn";
-            this.BaseAddrColumn.ReadOnly = true;
-            this.BaseAddrColumn.Width = 70;
-            // 
-            // SizeColumn
-            // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SizeColumn.DefaultCellStyle = dataGridViewCellStyle21;
-            this.SizeColumn.HeaderText = "Size";
-            this.SizeColumn.Name = "SizeColumn";
-            this.SizeColumn.ReadOnly = true;
-            this.SizeColumn.Width = 50;
-            // 
-            // UnloadColumn
-            // 
-            this.UnloadColumn.HeaderText = "Unload";
-            this.UnloadColumn.Name = "UnloadColumn";
-            this.UnloadColumn.Width = 55;
-            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -194,6 +154,46 @@
             this.button2.Text = "Information";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // ModuleColumn
+            // 
+            this.ModuleColumn.HeaderText = "Module";
+            this.ModuleColumn.Name = "ModuleColumn";
+            this.ModuleColumn.ReadOnly = true;
+            this.ModuleColumn.Width = 195;
+            // 
+            // ModuleIdColumn
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ModuleIdColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ModuleIdColumn.HeaderText = "ID";
+            this.ModuleIdColumn.Name = "ModuleIdColumn";
+            this.ModuleIdColumn.ReadOnly = true;
+            this.ModuleIdColumn.Width = 70;
+            // 
+            // BaseAddrColumn
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.BaseAddrColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.BaseAddrColumn.HeaderText = "Entry";
+            this.BaseAddrColumn.Name = "BaseAddrColumn";
+            this.BaseAddrColumn.ReadOnly = true;
+            this.BaseAddrColumn.Width = 70;
+            // 
+            // SizeColumn
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SizeColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.SizeColumn.HeaderText = "Size";
+            this.SizeColumn.Name = "SizeColumn";
+            this.SizeColumn.ReadOnly = true;
+            this.SizeColumn.Width = 60;
+            // 
+            // UnloadColumn
+            // 
+            this.UnloadColumn.HeaderText = "Unload";
+            this.UnloadColumn.Name = "UnloadColumn";
+            this.UnloadColumn.Width = 50;
             // 
             // Form1
             // 
@@ -227,13 +227,13 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModuleColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModuleIdColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn BaseAddrColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeColumn;
         private System.Windows.Forms.DataGridViewButtonColumn UnloadColumn;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button button2;
     }
 }
 
