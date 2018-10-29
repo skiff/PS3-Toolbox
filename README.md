@@ -19,8 +19,7 @@ Not sure what causes this (not enough memory error) because the same plugin will
 - Black Ops 2 (1.19)
 
 # Example
-[![PS3 SPRX Loader Example](https://img.youtube.com/vi/9yjhm56ddSY/0.jpg)]
-(https://www.youtube.com/watch?v=9yjhm56ddSY "PS3 SPRX Loader Example")
+[![PS3 SPRX Loader Example](https://img.youtube.com/vi/9yjhm56ddSY/0.jpg)](https://www.youtube.com/watch?v=9yjhm56ddSY "PS3 SPRX Loader Example")
 
 # Features being added
 - All COD support
