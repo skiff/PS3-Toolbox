@@ -18,6 +18,11 @@ Not sure what causes this (not enough memory error) because the same plugin will
 - Modern Warfare 3 (1.24)
 - Black Ops 2 (1.19)
 
+# Example
+<iframe width="420" height="315"
+src="https://www.youtube.com/embed/https://youtu.be/9yjhm56ddSY">
+</iframe>
+
 # Features being added
 - All COD support
 - Game function calls
