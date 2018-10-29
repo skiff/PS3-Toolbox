@@ -19,9 +19,8 @@ Not sure what causes this (not enough memory error) because the same plugin will
 - Black Ops 2 (1.19)
 
 # Example
-<iframe width="420" height="315"
-src="https://www.youtube.com/embed/https://youtu.be/9yjhm56ddSY">
-</iframe>
+[![PS3 SPRX Loader Example](https://img.youtube.com/vi/9yjhm56ddSY/0.jpg)]
+(https://www.youtube.com/watch?v=9yjhm56ddSY)
 
 # Features being added
 - All COD support
