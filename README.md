@@ -1,10 +1,10 @@
 # PS3-SPRX-Loader
 Tool for a DEX Playstation 3 System. <br>
 This tool allows you to load SPRX modules into game memory without having to modify the eboot to load it.<br>
-ProDG and Target Manager are required to use the tool<br>
-<br>
-This tool uses the games' R_SetFrameFog function on cod games to load the modules<br>
-If your plugin uses this address, you may experience issues after loading
+ProDG and Target Manager are required to use the tool
+<br><br>
+This tool uses a games menu drawing function to load/unload the modules<br>
+This is why when you load and unload your screen goes black for a second
 <br><br>
 On some games (mostly BO1 and BO2) you may get an error 0x80010004 when loading your  plugin<br>
 Not sure what causes this (not enough memory error) because the same plugin will load fine from eboot

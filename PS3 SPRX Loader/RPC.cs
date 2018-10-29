@@ -216,7 +216,7 @@ namespace PS3_SPRX_Loader {
     public static class RPC_ADDRESS {
         public const uint COD4 = 0x0;
         public const uint WAW = 0x0;
-        public const uint MW2 = 0x38EDE8;
+        public const uint MW2 = 0x2539F8;
         public const uint BO1 = 0x0;
         public const uint MW3 = 0x3BC990;
         public const uint BO2 = 0x7AA050;

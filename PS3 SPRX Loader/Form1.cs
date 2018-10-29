@@ -16,24 +16,34 @@ namespace PS3_SPRX_Loader {
         public Form1() {
             InitializeComponent();
             textBox1.Text = Properties.Settings.Default.Module;
+            comboBox1.Text = Properties.Settings.Default.Game;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             Properties.Settings.Default.Module = textBox1.Text;
+            Properties.Settings.Default.Game = comboBox1.Text;
             Properties.Settings.Default.Save();
 
             if(PS3.IsConnected)
                 RPC.Disable();
         }
 
+        private void button2_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/skiffaw/PS3-SPRX-Loader/blob/master/README.md");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/skiffaw/PS3-SPRX-Loader");
+        }
+
         private void connectToPS3Button_Click(object sender, EventArgs e) {
             try {
                 if (PS3.ConnectTarget() && PS3.AttachProcess()) {
                     button6.Enabled = true;
-                    button2.Enabled = true;
-                    button3.Enabled = true;
-                    button1.Enabled = false;
+                    button4.Enabled = true;
+                    button5.Enabled = true;
 
+                    button1.Enabled = false;
                     comboBox1.Enabled = true;
 
                     refreshModules();
@@ -45,29 +55,14 @@ namespace PS3_SPRX_Loader {
         }
 
         private void disconnectFromPS3Button_Click(object sender, EventArgs e) {
-            RPC.Disable();
-            PS3.DisconnectTarget();
+            dataGridView1.Rows.Clear();
 
             button6.Enabled = false;
-            button2.Enabled = false;
-            button3.Enabled = false;
+            button4.Enabled = false;
+            button5.Enabled = false;
+
             button1.Enabled = true;
             comboBox1.Enabled = false;
-        }
-
-        private void enableRPCButton_Click(object sender, EventArgs e) {
-            if (RPC.Enable(comboBox1.Text)) {
-                button4.Enabled = true;
-            }
-            else {
-                MessageBox.Show("Game is not supported");
-            }
-        }
-
-        private void disableRPCButton_Click(object sender, EventArgs e) {
-            RPC.Disable();
-
-            button4.Enabled = false;
         }
 
         private void refreshModules() {
@@ -86,25 +81,55 @@ namespace PS3_SPRX_Loader {
         }
 
         private void button4_Click(object sender, EventArgs e) {
-            uint error = RPC.LoadModule(textBox1.Text);
-            if (error != 0x0)
-                MessageBox.Show("Load Module Error: 0x" + error.ToString("X"));
+            if (RPC.Enable(comboBox1.Text)) {
+                string modulePath = textBox1.Text;
+                if (!modulePath.Contains("hdd0"))
+                    modulePath = "/host_root/" + textBox1.Text;
 
-            refreshModules();
+                modulePath.Replace("\\", "/");
+
+                uint error = RPC.LoadModule(modulePath);
+                if (error != 0x0)
+                    MessageBox.Show("Load Module Error: 0x" + error.ToString("X"));
+
+                System.Threading.Thread.Sleep(100);
+
+                refreshModules();
+
+                RPC.Disable();
+            }
+            else {
+                MessageBox.Show("Game is not supported");
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             uint moduleId = Convert.ToUInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString(), 16);
 
-            if (RPC.RPC_ENABLED) {
+            if (RPC.Enable(comboBox1.Text)) {
                 uint error = RPC.UnloadModule(moduleId);
                 if (error != 0x0)
                     MessageBox.Show("Unload Module Error: 0x" + error.ToString("X"));
 
+                System.Threading.Thread.Sleep(100);
+
                 refreshModules();
+
+                RPC.Disable();
             }
-            else
-                MessageBox.Show("You must enable RPC first");
+            else {
+                MessageBox.Show("Game is not supported");
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e) {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "SPRX Files|*.sprx";
+            openFileDialog1.Title = "Select a File";
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                textBox1.Text = openFileDialog1.FileName;
+            }
         }
     }
 }
