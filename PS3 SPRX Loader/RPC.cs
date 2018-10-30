@@ -120,32 +120,32 @@ namespace PS3_SPRX_Loader {
         private static void UpdateRPC(uint address) {
             if (address == RPC_ADDRESS.MW2) {
                 RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x4C;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0x4C;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0x4C;
+                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0x4C;
+                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0x4C;
             }
 
             else if (address == RPC_ADDRESS.BO1) {
                 RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x7D;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0x7D;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0x7D;
+                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0x7D;
+                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0x7D;
             }
 
             else if (address == RPC_ADDRESS.MW3) {
                 RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x2C;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0x2C;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0x2C;
+                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0x2C;
+                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0x2C;
             }
 
             else if(address == RPC_ADDRESS.BO2) {
                 RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0xFD;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0xFD;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0xFD;
+                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0xFD;
+                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0xFD;
             }
 
             else if (address == RPC_ADDRESS.GHOST) {
                 RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x88;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0x88;
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0x88;
+                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0x88;
+                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0x88;
             }
 
             else if (address == RPC_ADDRESS.AW) {
