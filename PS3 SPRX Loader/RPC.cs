@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.IO;
+using System.Threading;
 
 namespace PS3_SPRX_Loader {
     public class RPC {
@@ -117,22 +118,40 @@ namespace PS3_SPRX_Loader {
         }
 
         private static void UpdateRPC(uint address) {
-            if(address == RPC_ADDRESS.MW2) {
-                RPC_BYTES[0x67] = 0x4C;
-                RPC_BYTES[0xC3] = 0x4C;
-                RPC_BYTES[0xFB] = 0x4C;
+            if (address == RPC_ADDRESS.MW2) {
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x4C;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0x4C;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0x4C;
+            }
+
+            else if (address == RPC_ADDRESS.BO1) {
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x7D;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0x7D;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0x7D;
             }
 
             else if (address == RPC_ADDRESS.MW3) {
-                RPC_BYTES[0x67] = 0x2C;
-                RPC_BYTES[0xC3] = 0x2C;
-                RPC_BYTES[0xFB] = 0x2C;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x2C;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0x2C;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0x2C;
             }
 
             else if(address == RPC_ADDRESS.BO2) {
-                RPC_BYTES[0x67] = 0xFD;
-                RPC_BYTES[0xC3] = 0xFD;
-                RPC_BYTES[0xFB] = 0xFD;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0xFD;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0xFD;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0xFD;
+            }
+
+            else if (address == RPC_ADDRESS.GHOST) {
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x88;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xC3] = 0x88;
+                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0xFB] = 0x88;
+            }
+
+            else if (address == RPC_ADDRESS.AW) {
+                RPC_BYTES[0x66] = 0x03; RPC_BYTES[0x67] = 0x1D;
+                RPC_BYTES[0xC2] = 0x03; RPC_BYTES[0xC3] = 0x1D;
+                RPC_BYTES[0xFA] = 0x03; RPC_BYTES[0xFB] = 0x1D;
             }
         }
 
@@ -198,21 +217,30 @@ namespace PS3_SPRX_Loader {
         public const uint COD4 = 0x0;
         public const uint WAW = 0x0;
         public const uint MW2 = 0x2539F8;
-        public const uint BO1 = 0x0;
+        public const uint BO1 = 0x432FF8;
         public const uint MW3 = 0xE1C58;
         public const uint BO2 = 0x3708D0;
-        public const uint GHOST = 0x0;
-        public const uint AW = 0x0;
+        public const uint GHOST = 0xB143C;
+        public const uint AW = 0xEA4E8;
 
         public static uint GetAddress(string game) {
             if (game.Equals("MW2"))
                 return MW2;
+
+            if (game.Equals("BO1"))
+                return BO1;
 
             if (game.Equals("MW3"))
                 return MW3;
 
             if (game.Equals("BO2"))
                 return BO2;
+
+            if (game.Equals("GHOST"))
+                return GHOST;
+
+            if (game.Equals("AW"))
+                return AW;
 
             return 0x0;
         }

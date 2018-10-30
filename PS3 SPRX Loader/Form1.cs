@@ -83,14 +83,15 @@ namespace PS3_SPRX_Loader {
                 modulePath.Replace("\\", "/");
 
                 uint error = RPC.LoadModule(modulePath);
-                if (error != 0x0)
-                    MessageBox.Show("Load Module Error: 0x" + error.ToString("X"));
 
                 Thread.Sleep(100);
 
+                RPC.Disable();
+
                 refreshModules();
 
-                RPC.Disable();
+                if (error != 0x0)
+                    MessageBox.Show("Unload Module Error: 0x" + error.ToString("X"));
             }
             else {
                 MessageBox.Show("Game is not supported");
@@ -103,14 +104,15 @@ namespace PS3_SPRX_Loader {
 
                 if (RPC.Enable(comboBox1.Text)) {
                     uint error = RPC.UnloadModule(moduleId);
-                    if (error != 0x0)
-                        MessageBox.Show("Unload Module Error: 0x" + error.ToString("X"));
 
                     Thread.Sleep(100);
 
+                    RPC.Disable();
+
                     refreshModules();
 
-                    RPC.Disable();
+                    if (error != 0x0)
+                        MessageBox.Show("Unload Module Error: 0x" + error.ToString("X"));
                 }
                 else {
                     MessageBox.Show("Game is not supported");
