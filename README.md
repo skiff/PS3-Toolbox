@@ -24,4 +24,4 @@ You can look up error codes here: http://www.psdevwiki.com/ps3/Error_Codes
 [![PS3 SPRX Loader Example](https://img.youtube.com/vi/9yjhm56ddSY/0.jpg)](https://www.youtube.com/watch?v=9yjhm56ddSY "PS3 SPRX Loader Example")
 
 # Credits
-- Partially used PS3Lib (iMCSx)'s implementation of PS3TMAPI_NET.dll
+- Partially used iMCSx's implementation of PS3TMAPI_NET.dll
