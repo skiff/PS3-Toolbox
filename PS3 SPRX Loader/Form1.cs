@@ -10,12 +10,10 @@ namespace PS3_SPRX_Loader {
         public Form1() {
             InitializeComponent();
             textBox1.Text = Properties.Settings.Default.Module;
-            comboBox1.Text = Properties.Settings.Default.Game;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             Properties.Settings.Default.Module = textBox1.Text;
-            Properties.Settings.Default.Game = comboBox1.Text;
             Properties.Settings.Default.Save();
 
             if(PS3.IsConnected)
@@ -35,12 +33,12 @@ namespace PS3_SPRX_Loader {
                 if (PS3.ConnectTarget() && PS3.AttachProcess()) {
                     button6.Enabled = true;
                     button4.Enabled = true;
-                    button5.Enabled = true;
 
                     button1.Enabled = false;
-                    comboBox1.Enabled = true;
 
                     refreshModules();
+
+                    label1.Text = "Current Game: " + PS3.GetCurrentGame();
                 }
             }
             catch {
@@ -53,10 +51,10 @@ namespace PS3_SPRX_Loader {
 
             button6.Enabled = false;
             button4.Enabled = false;
-            button5.Enabled = false;
 
             button1.Enabled = true;
-            comboBox1.Enabled = false;
+
+            label1.Text = "Current Game: No Game Detected";
         }
 
         private void refreshModules() {
@@ -75,7 +73,7 @@ namespace PS3_SPRX_Loader {
         }
 
         private void button4_Click(object sender, EventArgs e) {
-            if (RPC.Enable(comboBox1.Text)) {
+            if (RPC.Enable(label1.Text)) {
                 string modulePath = textBox1.Text;
                 if (!modulePath.Contains("hdd0"))
                     modulePath = "/host_root/" + textBox1.Text;
@@ -91,7 +89,7 @@ namespace PS3_SPRX_Loader {
                 refreshModules();
 
                 if (error != 0x0)
-                    MessageBox.Show("Unload Module Error: 0x" + error.ToString("X"));
+                    MessageBox.Show("Load Module Error: 0x" + error.ToString("X"));
             }
             else {
                 MessageBox.Show("Game is not supported");
@@ -102,7 +100,7 @@ namespace PS3_SPRX_Loader {
             if (e.ColumnIndex == 4) {
                 uint moduleId = Convert.ToUInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString(), 16);
 
-                if (RPC.Enable(comboBox1.Text)) {
+                if (RPC.Enable(label1.Text)) {
                     uint error = RPC.UnloadModule(moduleId);
 
                     Thread.Sleep(100);

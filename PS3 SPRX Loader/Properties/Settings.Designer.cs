@@ -34,17 +34,5 @@ namespace PS3_SPRX_Loader.Properties {
                 this["Module"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MW2")]
-        public string Game {
-            get {
-                return ((string)(this["Game"]));
-            }
-            set {
-                this["Game"] = value;
-            }
-        }
     }
 }

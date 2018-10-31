@@ -5,8 +5,5 @@
     <Setting Name="Module" Type="System.String" Scope="User">
       <Value Profile="(Default)">/dev_hdd0/tmp/module.sprx</Value>
     </Setting>
-    <Setting Name="Game" Type="System.String" Scope="User">
-      <Value Profile="(Default)">MW2</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

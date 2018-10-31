@@ -161,6 +161,23 @@ namespace PS3_SPRX_Loader {
             return 0x0;
         }
 
+        public string GetCurrentGame() {
+            PS3TMAPI.ProcessInfo processInfo = new PS3TMAPI.ProcessInfo();
+            PS3TMAPI.GetProcessInfo(0, ProcessID(), out processInfo);
+            string GameCode = processInfo.Hdr.ELFPath.Split('/')[3];
+
+            try {
+                System.Net.WebClient client = new System.Net.WebClient();
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+                string content = client.DownloadString(String.Format("https://a0.ww.np.dl.playstation.net/tpl/np/{0}/{1}-ver.xml", GameCode, GameCode)).Replace("<TITLE>", ";");
+                string name = content.Split(';')[1].Replace("</TITLE>", ";");
+                return name.Split(';')[0].Replace("Â", "");
+            }
+            catch {
+                return "Unknown Game";
+            }
+        }
+
         public class Extension {
             private TMAPI Target;
 

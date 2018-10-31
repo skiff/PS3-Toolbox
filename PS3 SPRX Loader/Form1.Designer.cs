@@ -23,23 +23,23 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.button2 = new System.Windows.Forms.Button();
             this.ModuleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModuleIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BaseAddrColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnloadColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button4 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,12 +74,52 @@
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // ModuleColumn
+            // 
+            this.ModuleColumn.HeaderText = "Module";
+            this.ModuleColumn.Name = "ModuleColumn";
+            this.ModuleColumn.ReadOnly = true;
+            this.ModuleColumn.Width = 195;
+            // 
+            // ModuleIdColumn
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ModuleIdColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ModuleIdColumn.HeaderText = "ID";
+            this.ModuleIdColumn.Name = "ModuleIdColumn";
+            this.ModuleIdColumn.ReadOnly = true;
+            this.ModuleIdColumn.Width = 70;
+            // 
+            // BaseAddrColumn
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.BaseAddrColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.BaseAddrColumn.HeaderText = "Entry";
+            this.BaseAddrColumn.Name = "BaseAddrColumn";
+            this.BaseAddrColumn.ReadOnly = true;
+            this.BaseAddrColumn.Width = 70;
+            // 
+            // SizeColumn
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SizeColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.SizeColumn.HeaderText = "Size";
+            this.SizeColumn.Name = "SizeColumn";
+            this.SizeColumn.ReadOnly = true;
+            this.SizeColumn.Width = 60;
+            // 
+            // UnloadColumn
+            // 
+            this.UnloadColumn.HeaderText = "Unload";
+            this.UnloadColumn.Name = "UnloadColumn";
+            this.UnloadColumn.Width = 50;
+            // 
             // button4
             // 
             this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(429, 343);
+            this.button4.Location = new System.Drawing.Point(408, 343);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(50, 23);
+            this.button4.Size = new System.Drawing.Size(71, 23);
             this.button4.TabIndex = 6;
             this.button4.Text = "Load";
             this.button4.UseVisualStyleBackColor = true;
@@ -87,9 +127,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(83, 345);
+            this.textBox1.Location = new System.Drawing.Point(13, 345);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(284, 20);
+            this.textBox1.Size = new System.Drawing.Size(312, 20);
             this.textBox1.TabIndex = 7;
             this.textBox1.Text = "/dev_hdd0/tmp/module.sprx";
             // 
@@ -104,31 +144,12 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.disconnectFromPS3Button_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Enabled = false;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "COD4",
-            "WAW",
-            "MW2",
-            "BO1",
-            "MW3",
-            "BO2",
-            "GHOST",
-            "AW"});
-            this.comboBox1.Location = new System.Drawing.Point(13, 345);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(64, 21);
-            this.comboBox1.TabIndex = 11;
-            this.comboBox1.Text = "Game";
-            // 
             // button5
             // 
-            this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(373, 343);
+            this.button5.AutoSize = true;
+            this.button5.Location = new System.Drawing.Point(331, 343);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(50, 23);
+            this.button5.Size = new System.Drawing.Size(71, 23);
             this.button5.TabIndex = 13;
             this.button5.Text = "Browse";
             this.button5.UseVisualStyleBackColor = true;
@@ -155,55 +176,24 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // ModuleColumn
+            // label1
             // 
-            this.ModuleColumn.HeaderText = "Module";
-            this.ModuleColumn.Name = "ModuleColumn";
-            this.ModuleColumn.ReadOnly = true;
-            this.ModuleColumn.Width = 195;
-            // 
-            // ModuleIdColumn
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ModuleIdColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.ModuleIdColumn.HeaderText = "ID";
-            this.ModuleIdColumn.Name = "ModuleIdColumn";
-            this.ModuleIdColumn.ReadOnly = true;
-            this.ModuleIdColumn.Width = 70;
-            // 
-            // BaseAddrColumn
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.BaseAddrColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.BaseAddrColumn.HeaderText = "Entry";
-            this.BaseAddrColumn.Name = "BaseAddrColumn";
-            this.BaseAddrColumn.ReadOnly = true;
-            this.BaseAddrColumn.Width = 70;
-            // 
-            // SizeColumn
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SizeColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.SizeColumn.HeaderText = "Size";
-            this.SizeColumn.Name = "SizeColumn";
-            this.SizeColumn.ReadOnly = true;
-            this.SizeColumn.Width = 60;
-            // 
-            // UnloadColumn
-            // 
-            this.UnloadColumn.HeaderText = "Unload";
-            this.UnloadColumn.Name = "UnloadColumn";
-            this.UnloadColumn.Width = 50;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 368);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(170, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Current Game: No Game Detected";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 378);
+            this.ClientSize = new System.Drawing.Size(493, 390);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button4);
@@ -225,7 +215,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button button2;
@@ -234,6 +223,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BaseAddrColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeColumn;
         private System.Windows.Forms.DataGridViewButtonColumn UnloadColumn;
+        private System.Windows.Forms.Label label1;
     }
 }
 

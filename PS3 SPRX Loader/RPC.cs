@@ -224,23 +224,27 @@ namespace PS3_SPRX_Loader {
         public const uint AW = 0xEA4E8;
 
         public static uint GetAddress(string game) {
-            if (game.Equals("MW2"))
-                return MW2;
-
-            if (game.Equals("BO1"))
+            if (game.Contains("Black Ops")) {
+                if (game.Contains("II"))
+                    return BO2;
                 return BO1;
+            }
+               
+            if (game.Contains("Modern Warfare")) {
+                if (game.Contains("3"))
+                    return MW3;
+                if (game.Contains("2"))
+                    return MW2;
+            }
 
-            if (game.Equals("MW3"))
-                return MW3;
-
-            if (game.Equals("BO2"))
-                return BO2;
-
-            if (game.Equals("GHOST"))
+            if (game.Contains("Ghosts"))
                 return GHOST;
 
-            if (game.Equals("AW"))
+            if (game.Contains("Advanced Warfare"))
                 return AW;
+
+            if (game.Contains("World at War"))
+                return WAW;
 
             return 0x0;
         }
