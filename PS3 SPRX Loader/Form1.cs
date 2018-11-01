@@ -82,7 +82,7 @@ namespace PS3_SPRX_Loader {
 
                 uint error = RPC.LoadModule(modulePath);
 
-                Thread.Sleep(100);
+                Thread.Sleep(150);
 
                 RPC.Disable();
 
@@ -103,7 +103,7 @@ namespace PS3_SPRX_Loader {
                 if (RPC.Enable(label1.Text)) {
                     uint error = RPC.UnloadModule(moduleId);
 
-                    Thread.Sleep(100);
+                    Thread.Sleep(150);
 
                     RPC.Disable();
 

@@ -10,7 +10,8 @@ You can look up error codes here: http://www.psdevwiki.com/ps3/Error_Codes
 
 # Features
 - Load and Unload SPRX Modules from games
-- View moduleId, entry address, module size for loaded modules
+- View module id, entry address, module size for loaded modules
+- Auto detect current game
 
 # Supported Games
 - Modern Warfare 2 (1.14)

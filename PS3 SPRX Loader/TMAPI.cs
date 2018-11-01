@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Linq;
 using System.Text;
 
@@ -167,11 +168,10 @@ namespace PS3_SPRX_Loader {
             string GameCode = processInfo.Hdr.ELFPath.Split('/')[3];
 
             try {
-                System.Net.WebClient client = new System.Net.WebClient();
-                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+                WebClient client = new System.Net.WebClient();
+                ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                 string content = client.DownloadString(String.Format("https://a0.ww.np.dl.playstation.net/tpl/np/{0}/{1}-ver.xml", GameCode, GameCode)).Replace("<TITLE>", ";");
-                string name = content.Split(';')[1].Replace("</TITLE>", ";");
-                return name.Split(';')[0].Replace("Â", "");
+                return content.Split(';')[1].Replace("</TITLE>", ";").Split(';')[0].Replace("Â", "");
             }
             catch {
                 return "Unknown Game";

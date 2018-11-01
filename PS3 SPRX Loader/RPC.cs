@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading;
+﻿using System.Threading;
 
 namespace PS3_SPRX_Loader {
     public class RPC {
@@ -9,14 +8,22 @@ namespace PS3_SPRX_Loader {
         private const uint MODULE_IDS_ADDR =    0x10060004;
         private const uint MODULE_ERROR_ADDR =  0x10060008;
         private const uint PLUGIN_PATH_ADDR =   0x10060010;
-        private const uint PLUGIN_TABLE =       0x10060040;
 
         public static bool RPC_ENABLED = false;
         private static uint RPC_INSTALL_ADDR = 0x0;
-        private static byte[] RESTORE_BYTES = new byte[0x13C];
+
+        private static byte[] RESTORE_0 = new byte[0x4];
+        private static byte[] RESTORE_BYTES = new byte[0x138];
+
+        private static byte[] RPC_BLR = new byte[] {
+            0x4E, 0x80, 0x00, 0x20 //blr
+        };
+
+        private static byte[] RPC_ADJUST_STACK = new byte[] {
+            0xF8, 0x21, 0xFF, 0x91 //stdu r1, -0x70(r1)
+        };
 
         private static byte[] RPC_BYTES = new byte[] {
-            0xF8, 0x21, 0xFF, 0x91, //stdu r1, -0x70(r1)
             0x7C, 0x08, 0x02, 0xA6, //mflr r0
             0xF8, 0x01, 0x00, 0x80, //std r0, 0x80(r1)
             0x3C, 0x80, 0x10, 0x06, //lis %r4, 0x1006
@@ -119,39 +126,39 @@ namespace PS3_SPRX_Loader {
 
         private static void UpdateRPC(uint address) {
             if (address == RPC_ADDRESS.MW2) {
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x4C;
-                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0x4C;
-                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0x4C;
+                RPC_BYTES[0x62] = 0x02; RPC_BYTES[0x63] = 0x4C;
+                RPC_BYTES[0xBE] = 0x02; RPC_BYTES[0xBF] = 0x4C;
+                RPC_BYTES[0xF6] = 0x02; RPC_BYTES[0xF7] = 0x4C;
             }
 
             else if (address == RPC_ADDRESS.BO1) {
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x7D;
-                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0x7D;
-                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0x7D;
+                RPC_BYTES[0x62] = 0x02; RPC_BYTES[0x63] = 0x7D;
+                RPC_BYTES[0xBE] = 0x02; RPC_BYTES[0xBF] = 0x7D;
+                RPC_BYTES[0xF6] = 0x02; RPC_BYTES[0xF7] = 0x7D;
             }
 
             else if (address == RPC_ADDRESS.MW3) {
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x2C;
-                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0x2C;
-                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0x2C;
+                RPC_BYTES[0x62] = 0x02; RPC_BYTES[0x63] = 0x2C;
+                RPC_BYTES[0xBE] = 0x02; RPC_BYTES[0xBF] = 0x2C;
+                RPC_BYTES[0xF6] = 0x02; RPC_BYTES[0xF7] = 0x2C;
             }
 
             else if(address == RPC_ADDRESS.BO2) {
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0xFD;
-                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0xFD;
-                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0xFD;
+                RPC_BYTES[0x62] = 0x02; RPC_BYTES[0x63] = 0xFD;
+                RPC_BYTES[0xBE] = 0x02; RPC_BYTES[0xBF] = 0xFD;
+                RPC_BYTES[0xF6] = 0x02; RPC_BYTES[0xF7] = 0xFD;
             }
 
             else if (address == RPC_ADDRESS.GHOST) {
-                RPC_BYTES[0x66] = 0x02; RPC_BYTES[0x67] = 0x88;
-                RPC_BYTES[0xC2] = 0x02; RPC_BYTES[0xC3] = 0x88;
-                RPC_BYTES[0xFA] = 0x02; RPC_BYTES[0xFB] = 0x88;
+                RPC_BYTES[0x62] = 0x02; RPC_BYTES[0x63] = 0x88;
+                RPC_BYTES[0xBE] = 0x02; RPC_BYTES[0xBF] = 0x88;
+                RPC_BYTES[0xF6] = 0x02; RPC_BYTES[0xF7] = 0x88;
             }
 
             else if (address == RPC_ADDRESS.AW) {
-                RPC_BYTES[0x66] = 0x03; RPC_BYTES[0x67] = 0x1D;
-                RPC_BYTES[0xC2] = 0x03; RPC_BYTES[0xC3] = 0x1D;
-                RPC_BYTES[0xFA] = 0x03; RPC_BYTES[0xFB] = 0x1D;
+                RPC_BYTES[0x62] = 0x03; RPC_BYTES[0x63] = 0x1D;
+                RPC_BYTES[0xBE] = 0x03; RPC_BYTES[0xBF] = 0x1D;
+                RPC_BYTES[0xF6] = 0x03; RPC_BYTES[0xF7] = 0x1D;
             }
         }
 
@@ -160,11 +167,15 @@ namespace PS3_SPRX_Loader {
                 RPC_INSTALL_ADDR = RPC_ADDRESS.GetAddress(game);
                 if (RPC_INSTALL_ADDR != 0x0) {
                     UpdateRPC(RPC_INSTALL_ADDR);
-               
-                    PS3.GetMemory(RPC_INSTALL_ADDR, RESTORE_BYTES);
 
-                    PS3.Ext.WriteUInt32(ENABLE_ADDR, 0x0);
-                    PS3.SetMemory(RPC_INSTALL_ADDR, RPC_BYTES);
+                    PS3.GetMemory(RPC_INSTALL_ADDR, RESTORE_0); //save first instruction
+                    PS3.GetMemory(RPC_INSTALL_ADDR + 0x4, RESTORE_BYTES); //save bytes being overwritten
+
+                    PS3.Ext.WriteUInt32(ENABLE_ADDR, 0x0); //make sure rpc is not trying to execute
+
+                    PS3.SetMemory(RPC_INSTALL_ADDR, RPC_BLR); //blr function to prevent freezes
+                    PS3.SetMemory(RPC_INSTALL_ADDR + 0x4, RPC_BYTES); //install rpc
+                    PS3.SetMemory(RPC_INSTALL_ADDR, RPC_ADJUST_STACK); //allow rpc execution
 
                     RPC_ENABLED = true;
                     return true;
@@ -176,8 +187,11 @@ namespace PS3_SPRX_Loader {
 
         public static void Disable() {
             if(RPC_ENABLED) {
-                PS3.Ext.WriteUInt32(ENABLE_ADDR, 0x0);
-                PS3.SetMemory(RPC_INSTALL_ADDR, RESTORE_BYTES);
+                PS3.Ext.WriteUInt32(ENABLE_ADDR, 0x0); //make sure rpc is not trying to execute
+
+                PS3.SetMemory(RPC_INSTALL_ADDR, RPC_BLR); //blr function to prevent freezes
+                PS3.SetMemory(RPC_INSTALL_ADDR + 0x4, RESTORE_BYTES); //restore original bytes
+                PS3.SetMemory(RPC_INSTALL_ADDR, RESTORE_0); //restore first instruction
 
                 RPC_ENABLED = false;
             }
@@ -235,6 +249,7 @@ namespace PS3_SPRX_Loader {
                     return MW3;
                 if (game.Contains("2"))
                     return MW2;
+                return COD4;
             }
 
             if (game.Contains("Ghosts"))
