@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Sockets;
 
 namespace PS3_SPRX_Loader {
     public partial class Form1 : Form {
@@ -20,11 +22,24 @@ namespace PS3_SPRX_Loader {
                 RPC.Disable();
         }
 
-        private void button2_Click(object sender, EventArgs e) {
-            System.Diagnostics.Process.Start("https://github.com/skiffaw/PS3-SPRX-Loader/blob/master/README.md");
+        private void button3_Click(object sender, EventArgs e) {
+            try {
+                if (!PS3.ConnectTarget())
+                    return;
+
+                string IP = PS3.GetTargetName();
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+                socket.Connect(new IPEndPoint(IPAddress.Parse(IP), 80));
+                socket.Send(System.Text.Encoding.ASCII.GetBytes("GET /restart.ps3 HTTP/1.1\nHost: localhost\nContent-Length: 512\n\r\n\r\n"));
+                socket.Close();
+            }
+            catch {
+                MessageBox.Show("You must use webman and have the PS3 IP as the target name in target manager");
+            }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+        private void button2_Click(object sender, EventArgs e) {
             System.Diagnostics.Process.Start("https://github.com/skiffaw/PS3-SPRX-Loader");
         }
 

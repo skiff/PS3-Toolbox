@@ -58,7 +58,7 @@ namespace PS3_SPRX_Loader {
         }
 
         public void ResetToXMB() {
-            PS3TMAPI.Reset(Target, PS3TMAPI.ResetParameter.Soft);
+            PS3TMAPI.Reset(Target, PS3TMAPI.ResetParameter.Hard);
         }
 
         public void SetMemory(uint Address, byte[] Bytes) {

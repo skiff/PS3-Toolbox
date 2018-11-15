@@ -23,9 +23,9 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ModuleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,17 +37,17 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(13, 13);
+            this.button1.Location = new System.Drawing.Point(13, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 36);
+            this.button1.Size = new System.Drawing.Size(104, 36);
             this.button1.TabIndex = 0;
             this.button1.Text = "Connect and Attach";
             this.button1.UseVisualStyleBackColor = true;
@@ -83,8 +83,8 @@
             // 
             // ModuleIdColumn
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ModuleIdColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ModuleIdColumn.DefaultCellStyle = dataGridViewCellStyle19;
             this.ModuleIdColumn.HeaderText = "ID";
             this.ModuleIdColumn.Name = "ModuleIdColumn";
             this.ModuleIdColumn.ReadOnly = true;
@@ -92,8 +92,8 @@
             // 
             // BaseAddrColumn
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.BaseAddrColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.BaseAddrColumn.DefaultCellStyle = dataGridViewCellStyle20;
             this.BaseAddrColumn.HeaderText = "Entry";
             this.BaseAddrColumn.Name = "BaseAddrColumn";
             this.BaseAddrColumn.ReadOnly = true;
@@ -101,8 +101,8 @@
             // 
             // SizeColumn
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SizeColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SizeColumn.DefaultCellStyle = dataGridViewCellStyle21;
             this.SizeColumn.HeaderText = "Size";
             this.SizeColumn.Name = "SizeColumn";
             this.SizeColumn.ReadOnly = true;
@@ -136,9 +136,9 @@
             // button6
             // 
             this.button6.Enabled = false;
-            this.button6.Location = new System.Drawing.Point(149, 13);
+            this.button6.Location = new System.Drawing.Point(123, 12);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(130, 36);
+            this.button6.Size = new System.Drawing.Size(104, 36);
             this.button6.TabIndex = 9;
             this.button6.Text = "Disconnect";
             this.button6.UseVisualStyleBackColor = true;
@@ -155,22 +155,11 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(426, 25);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(41, 13);
-            this.linkLabel1.TabIndex = 14;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Source";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(285, 13);
+            this.button2.Location = new System.Drawing.Point(375, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(130, 36);
+            this.button2.Size = new System.Drawing.Size(104, 36);
             this.button2.TabIndex = 16;
             this.button2.Text = "Information";
             this.button2.UseVisualStyleBackColor = true;
@@ -185,14 +174,24 @@
             this.label1.TabIndex = 17;
             this.label1.Text = "Current Game: No Game Detected";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(233, 12);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(104, 36);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "Restart";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 390);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.textBox1);
@@ -216,7 +215,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModuleColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModuleIdColumn;
@@ -224,6 +222,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeColumn;
         private System.Windows.Forms.DataGridViewButtonColumn UnloadColumn;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button3;
     }
 }
 
