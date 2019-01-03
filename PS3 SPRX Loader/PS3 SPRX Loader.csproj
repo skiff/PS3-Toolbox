@@ -72,7 +72,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RPC.cs" />
+    <Compile Include="PS3RPC.cs" />
     <Compile Include="TMAPI.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

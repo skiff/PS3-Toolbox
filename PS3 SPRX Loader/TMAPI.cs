@@ -5,12 +5,95 @@ using System.Text;
 
 namespace PS3_SPRX_Loader {
     public class TMAPI {
+        public enum GPRegisters {
+            SNPS3_gpr_0 = 0x00,
+            SNPS3_gpr_1 = 0x01,
+            SNPS3_gpr_2 = 0x02,
+            SNPS3_gpr_3 = 0x03,
+            SNPS3_gpr_4 = 0x04,
+            SNPS3_gpr_5 = 0x05,
+            SNPS3_gpr_6 = 0x06,
+            SNPS3_gpr_7 = 0x07,
+            SNPS3_gpr_8 = 0x08,
+            SNPS3_gpr_9 = 0x09,
+            SNPS3_gpr_10 = 0x0a,
+            SNPS3_gpr_11 = 0x0b,
+            SNPS3_gpr_12 = 0x0c,
+            SNPS3_gpr_13 = 0x0d,
+            SNPS3_gpr_14 = 0x0e,
+            SNPS3_gpr_15 = 0x0f,
+            SNPS3_gpr_16 = 0x10,
+            SNPS3_gpr_17 = 0x11,
+            SNPS3_gpr_18 = 0x12,
+            SNPS3_gpr_19 = 0x13,
+            SNPS3_gpr_20 = 0x14,
+            SNPS3_gpr_21 = 0x15,
+            SNPS3_gpr_22 = 0x16,
+            SNPS3_gpr_23 = 0x17,
+            SNPS3_gpr_24 = 0x18,
+            SNPS3_gpr_25 = 0x19,
+            SNPS3_gpr_26 = 0x1a,
+            SNPS3_gpr_27 = 0x1b,
+            SNPS3_gpr_28 = 0x1c,
+            SNPS3_gpr_29 = 0x1d,
+            SNPS3_gpr_30 = 0x1e,
+            SNPS3_gpr_31 = 0x1f
+        }
+
+        public enum FPRegisters {
+            SNPS3_fpr_0 = 0x20,
+            SNPS3_fpr_1 = 0x21,
+            SNPS3_fpr_2 = 0x22,
+            SNPS3_fpr_3 = 0x23,
+            SNPS3_fpr_4 = 0x24,
+            SNPS3_fpr_5 = 0x25,
+            SNPS3_fpr_6 = 0x26,
+            SNPS3_fpr_7 = 0x27,
+            SNPS3_fpr_8 = 0x28,
+            SNPS3_fpr_9 = 0x29,
+            SNPS3_fpr_10 = 0x2A,
+            SNPS3_fpr_11 = 0x2B,
+            SNPS3_fpr_12 = 0x2C,
+            SNPS3_fpr_13 = 0x2D,
+            SNPS3_fpr_14 = 0x2E,
+            SNPS3_fpr_15 = 0x2F,
+            SNPS3_fpr_16 = 0x30,
+            SNPS3_fpr_17 = 0x31,
+            SNPS3_fpr_18 = 0x32,
+            SNPS3_fpr_19 = 0x33,
+            SNPS3_fpr_20 = 0x34,
+            SNPS3_fpr_21 = 0x35,
+            SNPS3_fpr_22 = 0x36,
+            SNPS3_fpr_23 = 0x37,
+            SNPS3_fpr_24 = 0x38,
+            SNPS3_fpr_25 = 0x39,
+            SNPS3_fpr_26 = 0x3A,
+            SNPS3_fpr_27 = 0x3B,
+            SNPS3_fpr_28 = 0x3C,
+            SNPS3_fpr_29 = 0x3D,
+            SNPS3_fpr_30 = 0x3E,
+            SNPS3_fpr_31 = 0x3F,
+        }
+
+        public enum SPRegisters {
+            SNPS3_pc = 0x40,
+            SNPS3_cr = 0x41,
+            SNPS3_lr = 0x42,
+            SNPS3_ctr = 0x43,
+            SNPS3_xer = 0x44,
+            SNPS3_fpscr = 0x45,
+            SNPS3_vscr = 0x46,
+            SNPS3_vrsave = 0x47,
+            SNPS3_msr = 0x48,
+        }
+
         public static int Target = 0;
         public bool IsConnected = false;
 
         public class Parameters {
             public static string Info, Usage, Status, ConsoleName;
 
+            public static PS3TMAPI.PPUThreadInfo threadInfo;
             public static uint ProcessID;
             public static uint[] ProcessIDs;
             public static uint[] ModuleIDs;
@@ -35,6 +118,41 @@ namespace PS3_SPRX_Loader {
             IsConnected = false;
         }
 
+        public static void GetThreadInfo() {
+            PS3TMAPI.ProcessInfo processInfo;
+            PS3TMAPI.GetProcessInfo(Target, Parameters.ProcessID, out processInfo);
+
+            if (processInfo.ThreadIDs.Length <= 0)
+                return;
+
+            for (int i = 0; i < processInfo.ThreadIDs.Length; i++) {
+                PS3TMAPI.GetPPUThreadInfo(Target, Parameters.ProcessID, processInfo.ThreadIDs[i], out Parameters.threadInfo);
+
+                if (Parameters.threadInfo.ThreadName == null)
+                    continue;
+                if (Parameters.threadInfo.ThreadName.Contains("EBOOT"))
+                    break;
+            }
+        }
+
+        public bool GetThreadByName(string name, ref PS3TMAPI.PPUThreadInfo LocalthreadInfo) {
+            PS3TMAPI.ProcessInfo processInfo;
+            PS3TMAPI.GetProcessInfo(Target, Parameters.ProcessID, out processInfo);
+
+            if (processInfo.ThreadIDs.Length <= 0)
+                return false;
+
+            for (int i = 0; i < processInfo.ThreadIDs.Length; i++) {
+                PS3TMAPI.GetPPUThreadInfo(Target, Parameters.ProcessID, processInfo.ThreadIDs[i], out LocalthreadInfo);
+
+                if (LocalthreadInfo.ThreadName == null)
+                    continue;
+                if (LocalthreadInfo.ThreadName.Contains(name))
+                    return true;
+            }
+            return false;
+        }
+
         public bool AttachProcess() {
             PS3TMAPI.GetProcessList(Target, out Parameters.ProcessIDs);
 
@@ -45,6 +163,8 @@ namespace PS3_SPRX_Loader {
                 PS3TMAPI.GetModuleList(Target, Parameters.ProcessID, out Parameters.ModuleIDs);
                 PS3TMAPI.ProcessAttach(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID);
                 PS3TMAPI.ProcessContinue(Target, Parameters.ProcessID);
+
+                GetThreadInfo();
 
                 Parameters.Info = "The Process 0x" + Parameters.ProcessID.ToString("X8") + " Has Been Attached !";
                 return true;
@@ -59,6 +179,69 @@ namespace PS3_SPRX_Loader {
 
         public void ResetToXMB() {
             PS3TMAPI.Reset(Target, PS3TMAPI.ResetParameter.Hard);
+        }
+
+        public void MainThreadStop() {
+            PS3TMAPI.ThreadStop(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID, Parameters.threadInfo.ThreadID);
+        }
+
+        public void MainThreadContinue() {
+            PS3TMAPI.ThreadContinue(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID, Parameters.threadInfo.ThreadID);
+        }
+
+        public void StopThreadyID(ulong ID) {
+            PS3TMAPI.ThreadStop(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID, ID);
+        }
+
+        public void ContinueThreadByID(ulong ID) {
+            PS3TMAPI.ThreadContinue(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID, ID);
+        }
+
+        public static ulong ULongReverse(ulong value) {
+            return (value & 0x00000000000000FFUL) << 56 | (value & 0x000000000000FF00UL) << 40 |
+                   (value & 0x0000000000FF0000UL) << 24 | (value & 0x00000000FF000000UL) << 8 |
+                   (value & 0x000000FF00000000UL) >> 8 | (value & 0x0000FF0000000000UL) >> 24 |
+                   (value & 0x00FF000000000000UL) >> 40 | (value & 0xFF00000000000000UL) >> 56;
+        }
+
+        public ulong GetSingleRegister(uint Register) {
+            ulong[] Return = new ulong[2];
+            uint[] Registers = new uint[1];
+
+            Registers[0] = Register;
+            PS3TMAPI.ThreadGetRegisters(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID, Parameters.threadInfo.ThreadID, (uint[])Registers, out Return);
+
+            return ULongReverse(Return[0]);
+        }
+
+        public void SetSingleRegister(uint Register, ulong Value) {
+            ulong[] Return = new ulong[1];
+            uint[] Registers = new uint[1];
+
+            Registers[0] = Register;
+            Return[0] = ULongReverse(Value);
+
+            PS3TMAPI.SNRESULT a = PS3TMAPI.ThreadSetRegisters(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID, Parameters.threadInfo.ThreadID, (uint[])Registers, Return);
+        }
+
+        public ulong GetSingleRegisterByThreadID(ulong ID, uint Register) {
+            ulong[] Return = new ulong[2];
+            uint[] Registers = new uint[1];
+
+            Registers[0] = Register;
+
+            PS3TMAPI.ThreadGetRegisters(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID, ID, (uint[])Registers, out Return);
+            return ULongReverse(Return[0]);
+        }
+
+        public void SetSingleRegisterByThreadID(ulong ID, uint Register, ulong Value) {
+            ulong[] Return = new ulong[1];
+            uint[] Registers = new uint[1];
+
+            Registers[0] = Register;
+            Return[0] = ULongReverse(Value);
+
+            PS3TMAPI.SNRESULT a = PS3TMAPI.ThreadSetRegisters(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID, ID, (uint[])Registers, Return);
         }
 
         public void SetMemory(uint Address, byte[] Bytes) {
