@@ -25,5 +25,5 @@ the game.
 ![Functions Page](https://i.imgur.com/mKwmmUS.png)
 
 # Credits
-[Matrix](https://github.com/skiffaw)
+[Matrix](https://github.com/skiffaw)<br>
 [Sabotage](https://github.com/egatobaS)
