@@ -19,6 +19,18 @@ namespace PS3_SPRX_Loader {
             Properties.Settings.Default.Save();
         }
 
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/skiffaw/");
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/egatobaS");
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/skiffaw/");
+        }
+
         private void button3_Click(object sender, EventArgs e) {
             try {
                 if (!PS3.ConnectTarget())
@@ -34,10 +46,6 @@ namespace PS3_SPRX_Loader {
             catch {
                 MessageBox.Show("You must use webman and have the PS3 IP as the target name in target manager");
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e) {
-            System.Diagnostics.Process.Start("https://github.com/skiffaw/PS3-SPRX-Loader");
         }
 
         private void connectToPS3Button_Click(object sender, EventArgs e) {
@@ -119,13 +127,73 @@ namespace PS3_SPRX_Loader {
         }
 
         private void systemCallBtn_Click(object sender, EventArgs e) {
-            ulong ret = PS3RPC.SystemCall(0x1);
-            MessageBox.Show(ret.ToString("X"));
+            ulong R3 = Convert.ToUInt64(textBox2.Text, 16);
+            ulong R4 = Convert.ToUInt64(textBox3.Text, 16);
+            ulong R5 = Convert.ToUInt64(textBox4.Text, 16);
+            ulong R6 = Convert.ToUInt64(textBox5.Text, 16);
+            ulong R7 = Convert.ToUInt64(textBox6.Text, 16);
+            ulong R8 = Convert.ToUInt64(textBox7.Text, 16);
+            ulong R9 = Convert.ToUInt64(textBox8.Text, 16);
+            ulong R10 = Convert.ToUInt64(textBox9.Text, 16);
+
+            uint ID = Convert.ToUInt32(textBox10.Text, 16);
+
+            ulong RET = PS3RPC.SystemCall(ID, R3, R4, R5, R6, R7, R8, R9, R10);
+
+            label11.Text = String.Format("Return Value: 0x{0}", RET.ToString("X"));
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            object ret = PS3RPC.FunctionCall(0x399CC8, new object[] { 0, "fastrestart;" });
+        private object GetParameter(string typeName, string value) {
+            try {
+                if (typeName.Equals("long"))
+                    return Convert.ToUInt64(value, 16);
+                if (typeName.Equals("float"))
+                    return Convert.ToSingle(value);
+                if (typeName.Equals("string"))
+                    return value;
+                return 0;
+            }
+            catch {
+                return 0;
+            }
+        }
+
+        private void callFunctionBtn_Click(object sender, EventArgs e) {
+            object[] registers = new object[9];
+
+            registers[0] = GetParameter(comboBox1.Text, textBox11.Text);
+            registers[1] = GetParameter(comboBox2.Text, textBox12.Text);
+            registers[2] = GetParameter(comboBox3.Text, textBox13.Text);
+            registers[3] = GetParameter(comboBox4.Text, textBox14.Text);
+            registers[4] = GetParameter(comboBox5.Text, textBox15.Text);
+            registers[5] = GetParameter(comboBox6.Text, textBox16.Text);
+            registers[6] = GetParameter(comboBox7.Text, textBox17.Text);
+            registers[7] = GetParameter(comboBox8.Text, textBox18.Text);
+            registers[8] = GetParameter(comboBox9.Text, textBox19.Text);
+
+            uint Address = Convert.ToUInt32(textBox20.Text, 16);
+            int Count = Convert.ToInt32(numericUpDown1.Value);
+
+            object[] parameters = new object[Count];
+            for (int i = 0; i < Count; i++)
+                parameters[i] = registers[i];
+
+            if(comboBox10.Text.Equals("long")) {
+                long ret = PS3RPC.Call<long>(Address, parameters);
+                label14.Text = String.Format("Return Value: 0x{0}", ret.ToString("X"));
+            }
+            else if (comboBox10.Text.Equals("float")) {
+                float ret = PS3RPC.Call<float>(Address, parameters);
+                label14.Text = String.Format("Return Value: 0x{0}", ret);
+            }
+            else if (comboBox10.Text.Equals("string")) {
+                string ret = PS3RPC.Call<string>(Address, parameters);
+                label14.Text = String.Format("Return Value: 0x{0}", ret);
+            }
+            else {
+                PS3RPC.Call<int>(Address, parameters);
+                label14.Text = "Return Value: No Return";
+            }
         }
     }
 }
