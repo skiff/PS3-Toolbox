@@ -3,6 +3,8 @@ Tool for a DEX Playstation 3 System. <br>
 ProDG and Target Manager are required to use the tool<br>
 <br>
 You can look up error codes here: http://www.psdevwiki.com/ps3/Error_Codes
+<br><br>
+[Downloads](https://github.com/skiffaw/PS3-Toolbox/releases)
 
 # Features
 - Load and unload SPRX modules from games
@@ -10,8 +12,6 @@ You can look up error codes here: http://www.psdevwiki.com/ps3/Error_Codes
 - Auto detect current game
 - Custom system calls
 - Custom game function calls
-<br><br>
-[Downloads](https://github.com/skiffaw/PS3-Toolbox/releases)
 
 # Explanation
 This tool works for all games on the PS3 system. Every game has the header of the loaded elf at 0x10000 with 0x200 bytes before the first
@@ -21,7 +21,7 @@ This main RPC will spawn a thread and start it on the second half of our RPC. We
 can continue as wanted. We now have a custom thread in the game which we can use to load sprx modules, use system calls and call functions within
 the game.
 
-# Example
+# Screenshots
 ![Modules Page](https://i.imgur.com/zGpyuUG.png)
 ![Functions Page](https://i.imgur.com/mKwmmUS.png)
 
