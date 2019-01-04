@@ -30,5 +30,5 @@ the game.
 
 # Credits
 [Matrix](https://github.com/skiffaw)<br>
-[Sabotage](https://github.com/egatobaS)
+[Sabotage](https://github.com/egatobaS)<br>
 [John](https://twitter.com/john1337hax)
