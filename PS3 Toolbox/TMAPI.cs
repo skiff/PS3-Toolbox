@@ -166,7 +166,7 @@ namespace PS3_SPRX_Loader {
 
                 GetThreadInfo();
 
-                Parameters.Info = "The Process 0x" + Parameters.ProcessID.ToString("X8") + " Has Been Attached !";
+                Parameters.Info = "The Process 0x" + Parameters.ProcessID.ToString("X8") + " Has Been Attached!";
                 return true;
             }
 

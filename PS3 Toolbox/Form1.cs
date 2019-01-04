@@ -54,6 +54,7 @@ namespace PS3_SPRX_Loader {
                     refreshModules();
 
                     label1.Text = "Current Game: " + PS3.GetCurrentGame();
+                    label13.Text = TMAPI.Parameters.Info;
                 }
             }
             catch {
