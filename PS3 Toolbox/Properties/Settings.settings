@@ -5,5 +5,20 @@
     <Setting Name="Module" Type="System.String" Scope="User">
       <Value Profile="(Default)">/dev_hdd0/tmp/module.sprx</Value>
     </Setting>
+    <Setting Name="PPC" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OpCodes" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InjectAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0x00010000</Value>
+    </Setting>
+    <Setting Name="PeekAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0x00010000</Value>
+    </Setting>
+    <Setting Name="PeekSize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0x100</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

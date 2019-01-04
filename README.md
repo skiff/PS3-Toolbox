@@ -10,6 +10,9 @@ You can look up error codes here: http://www.psdevwiki.com/ps3/Error_Codes
 - Auto detect current game
 - Custom system calls
 - Custom game function calls
+- PPC compiler and injector
+- Memory editor
+<br>
 [Downloads](https://github.com/skiffaw/PS3-Toolbox/releases)
 
 # Explanation
@@ -25,5 +28,6 @@ the game.
 ![Functions Page](https://i.imgur.com/mKwmmUS.png)
 
 # Credits
-[Matrix](https://github.com/skiffaw)<br>
-[Sabotage](https://github.com/egatobaS)
+[Matrix](https://twitter.com/Matrix)<br>
+[Sabotage](https://twitter.com/OneBigBoio)<br>
+[John](https://twitter.com/john1337hax)

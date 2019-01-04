@@ -3,49 +3,48 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
+using System.Diagnostics;
+using System.Linq;
+using Be.Windows.Forms;
 
 namespace PS3_SPRX_Loader {
     public partial class Form1 : Form {
         private static TMAPI PS3 = new TMAPI();
         private static PS3RPC PS3RPC = new PS3RPC(PS3);
+        private static byte[] MemoryData = null;
 
         public Form1() {
             InitializeComponent();
             textBox1.Text = Properties.Settings.Default.Module;
+            richTextBox1.Text = Properties.Settings.Default.PPC;
+            richTextBox2.Text = Properties.Settings.Default.OpCodes;
+            textBox21.Text = Properties.Settings.Default.InjectAddress;
+            textBox22.Text = Properties.Settings.Default.PeekAddress;
+            textBox23.Text = Properties.Settings.Default.PeekSize;
+            hexBox1.ByteProvider = new DynamicByteProvider(new byte[0x1000]);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             Properties.Settings.Default.Module = textBox1.Text;
+            Properties.Settings.Default.PPC = richTextBox1.Text;
+            Properties.Settings.Default.InjectAddress = textBox21.Text;
+            Properties.Settings.Default.OpCodes = richTextBox2.Text;
+            Properties.Settings.Default.PeekAddress = textBox22.Text;
+            Properties.Settings.Default.PeekSize = textBox23.Text;
             Properties.Settings.Default.Save();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.Process.Start("https://github.com/skiffaw/");
+            Process.Start("https://github.com/skiffaw/");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.Process.Start("https://github.com/egatobaS");
+            Process.Start("https://github.com/egatobaS");
         }
 
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.Process.Start("https://github.com/skiffaw/");
-        }
+        private void restartSystemBtn_Click(object sender, EventArgs e) {
 
-        private void button3_Click(object sender, EventArgs e) {
-            try {
-                if (!PS3.ConnectTarget())
-                    return;
-
-                string IP = PS3.GetTargetName();
-                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-                socket.Connect(new IPEndPoint(IPAddress.Parse(IP), 80));
-                socket.Send(System.Text.Encoding.ASCII.GetBytes("GET /restart.ps3 HTTP/1.1\nHost: localhost\nContent-Length: 512\n\r\n\r\n"));
-                socket.Close();
-            }
-            catch {
-                MessageBox.Show("You must use webman and have the PS3 IP as the target name in target manager");
-            }
         }
 
         private void connectToPS3Button_Click(object sender, EventArgs e) {
@@ -174,28 +173,88 @@ namespace PS3_SPRX_Loader {
             registers[8] = GetParameter(comboBox9.Text, textBox19.Text);
 
             uint Address = Convert.ToUInt32(textBox20.Text, 16);
-            int Count = Convert.ToInt32(numericUpDown1.Value);
-
-            object[] parameters = new object[Count];
-            for (int i = 0; i < Count; i++)
-                parameters[i] = registers[i];
 
             if(comboBox10.Text.Equals("long")) {
-                long ret = PS3RPC.Call<long>(Address, parameters);
+                long ret = PS3RPC.Call<long>(Address, registers);
                 label14.Text = String.Format("Return Value: 0x{0}", ret.ToString("X"));
             }
             else if (comboBox10.Text.Equals("float")) {
-                float ret = PS3RPC.Call<float>(Address, parameters);
+                float ret = PS3RPC.Call<float>(Address, registers);
                 label14.Text = String.Format("Return Value: 0x{0}", ret);
             }
             else if (comboBox10.Text.Equals("string")) {
-                string ret = PS3RPC.Call<string>(Address, parameters);
+                string ret = PS3RPC.Call<string>(Address, registers);
                 label14.Text = String.Format("Return Value: 0x{0}", ret);
             }
             else {
-                PS3RPC.Call<int>(Address, parameters);
+                PS3RPC.Call<int>(Address, registers);
                 label14.Text = "Return Value: No Return";
             }
+        }
+
+        private string[] CleanInstructions(string[] lines) {
+            for(int i = 0; i < lines.Length; i++) {
+                string line = lines[i];
+                if (line.EndsWith(";", StringComparison.CurrentCultureIgnoreCase))
+                    line = line.Substring(0, line.IndexOf(";", StringComparison.CurrentCultureIgnoreCase));
+
+                if (line.StartsWith("//"))
+                    line = string.Empty;
+
+                lines[i] = line;
+            }
+
+            return lines;
+        }
+
+        private void compileInstBtn_Click(object sender, EventArgs e) {
+            string[] instructions = CleanInstructions(richTextBox1.Lines);
+
+            File.WriteAllLines(@"PPC/assembly.s", instructions);
+
+            Process process = Process.Start(new ProcessStartInfo(@"PPC\\\\buildppc.bat") {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true
+            });
+            process.WaitForExit();
+
+            File.WriteAllText(@"PPC/assembly.s", richTextBox1.Text);
+            File.Delete(@"PPC/assembly.bin");
+            File.Move(@"a.out", @"PPC/assembly.bin");
+            
+            richTextBox2.Text = BitConverter.ToString(File.ReadAllBytes(@"PPC/assembly.bin")).Replace('-', ' ');
+        }
+
+        public static byte[] StringToByteArray(string hex) {
+            return ( from x in Enumerable.Range(0, hex.Length) where x % 2 == 0
+                select Convert.ToByte(hex.Substring(x, 2), 16)).ToArray();
+        }
+
+        private void injectOpCodesBtn_Click(object sender, EventArgs e) {
+            uint offset = Convert.ToUInt32(textBox21.Text.StartsWith("0x", StringComparison.CurrentCultureIgnoreCase) ? textBox21.Text.Substring(2) : textBox21.Text, 16);
+            byte[] buffer = StringToByteArray(richTextBox2.Text.Replace(" ", ""));
+            PS3.SetMemory(offset, buffer);
+
+            MessageBox.Show("PPC Injected");
+        }
+
+        private void peekMemoryBtn_Click(object sender, EventArgs e) {
+            uint address = Convert.ToUInt32(textBox22.Text, 16);
+            int size = Convert.ToInt32(textBox23.Text, 16);
+
+            MemoryData = PS3.Ext.ReadBytes(address, size);
+
+            MemoryStream stream = new MemoryStream(MemoryData);
+            DynamicFileByteProvider byteProvider = new DynamicFileByteProvider(stream);
+            hexBox1.ByteProvider = byteProvider;
+        }
+
+        private void pokeMemoryBtn_Click(object sender, EventArgs e) {
+            DynamicFileByteProvider dynamicFileByteProvider = hexBox1.ByteProvider as DynamicFileByteProvider;
+            dynamicFileByteProvider.ApplyChanges();
+
+            uint address = Convert.ToUInt32(textBox22.Text, 16);
+            PS3.SetMemory(address, MemoryData);
         }
     }
 }
