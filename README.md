@@ -25,6 +25,5 @@ the game.
 ![Functions Page](https://i.imgur.com/mKwmmUS.png)
 
 # Credits
-- Matrix
-- Sabotage
-- Sony
+[Matrix](https://github.com/skiffaw)
+[Sabotage](https://github.com/egatobaS)
