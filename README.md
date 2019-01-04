@@ -1,16 +1,16 @@
 # PS3-Toolbox
 Tool for a DEX Playstation 3 System. <br>
-This tool allows you to load SPRX modules into game memory without having to modify the eboot to load it.<br>
-ProDG and Target Manager are required to use the tool
-<br><br>
+ProDG and Target Manager are required to use the tool<br>
+<br>
 You can look up error codes here: http://www.psdevwiki.com/ps3/Error_Codes
 
 # Features
-- Load and Unload SPRX Modules from games
+- Load and unload SPRX modules from games
 - View module id, entry address, module size for loaded modules
 - Auto detect current game
 - Custom system calls
 - Custom game function calls
+[Downloads](https://github.com/skiffaw/PS3-Toolbox/releases)
 
 # Explanation
 This tool works for all games on the PS3 system. Every game has the header of the loaded elf at 0x10000 with 0x200 bytes before the first
