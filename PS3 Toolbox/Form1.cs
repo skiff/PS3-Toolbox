@@ -66,6 +66,7 @@ namespace PS3_SPRX_Loader {
             dataGridView1.Rows.Clear();
 
             label1.Text = "Current Game: No Game Detected";
+            label13.Text = "No Process Attached";
         }
 
         private void refreshModules() {
