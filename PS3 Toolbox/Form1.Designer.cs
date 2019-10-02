@@ -80,6 +80,7 @@
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -115,6 +116,7 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label13 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -129,7 +131,7 @@
             // 
             this.connectToPS3Button.Location = new System.Drawing.Point(13, 12);
             this.connectToPS3Button.Name = "connectToPS3Button";
-            this.connectToPS3Button.Size = new System.Drawing.Size(104, 36);
+            this.connectToPS3Button.Size = new System.Drawing.Size(90, 36);
             this.connectToPS3Button.TabIndex = 0;
             this.connectToPS3Button.Text = "Connect and Attach";
             this.connectToPS3Button.UseVisualStyleBackColor = true;
@@ -216,9 +218,9 @@
             // 
             // disconnectFromPS3Button
             // 
-            this.disconnectFromPS3Button.Location = new System.Drawing.Point(123, 12);
+            this.disconnectFromPS3Button.Location = new System.Drawing.Point(109, 12);
             this.disconnectFromPS3Button.Name = "disconnectFromPS3Button";
-            this.disconnectFromPS3Button.Size = new System.Drawing.Size(104, 36);
+            this.disconnectFromPS3Button.Size = new System.Drawing.Size(89, 36);
             this.disconnectFromPS3Button.TabIndex = 9;
             this.disconnectFromPS3Button.Text = "Disconnect";
             this.disconnectFromPS3Button.UseVisualStyleBackColor = true;
@@ -246,9 +248,9 @@
             // 
             // restartSystemBtn
             // 
-            this.restartSystemBtn.Location = new System.Drawing.Point(233, 12);
+            this.restartSystemBtn.Location = new System.Drawing.Point(204, 12);
             this.restartSystemBtn.Name = "restartSystemBtn";
-            this.restartSystemBtn.Size = new System.Drawing.Size(104, 36);
+            this.restartSystemBtn.Size = new System.Drawing.Size(89, 36);
             this.restartSystemBtn.TabIndex = 18;
             this.restartSystemBtn.Text = "Restart";
             this.restartSystemBtn.UseVisualStyleBackColor = true;
@@ -683,6 +685,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.textBox10);
             this.groupBox1.Controls.Add(this.label10);
@@ -709,6 +712,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System Calls";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(336, 68);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label11
             // 
@@ -1014,7 +1027,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(347, 12);
+            this.linkLabel1.Location = new System.Drawing.Point(415, 17);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(71, 13);
             this.linkLabel1.TabIndex = 22;
@@ -1025,7 +1038,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(347, 35);
+            this.linkLabel2.Location = new System.Drawing.Point(415, 40);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(89, 13);
             this.linkLabel2.TabIndex = 23;
@@ -1042,11 +1055,22 @@
             this.label13.Text = "No Process Attached";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(299, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(89, 36);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "Toggle XMB";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.openXMBBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 435);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
@@ -1167,6 +1191,8 @@
         private System.Windows.Forms.TextBox textBox23;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

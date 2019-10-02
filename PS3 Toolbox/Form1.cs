@@ -58,6 +58,29 @@ namespace PS3_SPRX_Loader {
             }
         }
 
+        private void openXMBBtn_Click(object sender, EventArgs e) {
+            try {
+                if (!PS3.ConnectTarget())
+                    return;
+                string IP = PS3.GetTargetName();
+
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect(new IPEndPoint(IPAddress.Parse(IP), 80));
+                socket.Send(System.Text.Encoding.ASCII.GetBytes("GET /pad.ps3?_psbtn_hold HTTP/1.1\nHost: localhost\nContent-Length: 512\n\r\n\r\n"));
+                socket.Close();
+
+                Thread.Sleep(50);
+
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect(new IPEndPoint(IPAddress.Parse(IP), 80));
+                socket.Send(System.Text.Encoding.ASCII.GetBytes("GET /pad.ps3?release HTTP/1.1\nHost: localhost\nContent-Length: 512\n\r\n\r\n"));
+                socket.Close();
+            }
+            catch {
+                MessageBox.Show("You must use webman and have the PS3 IP as the target name in target manager");
+            }
+        }
+
         private void connectToPS3Button_Click(object sender, EventArgs e) {
             try {
                 if (PS3.ConnectTarget() && PS3.AttachProcess()) {
