@@ -290,5 +290,9 @@ namespace PS3_SPRX_Loader {
             uint address = Convert.ToUInt32(textBox22.Text, 16);
             PS3.SetMemory(address, MemoryData);
         }
+
+        private void button1_Click(object sender, EventArgs e) {
+            PS3RPC.Install();
+        }
     }
 }
