@@ -170,8 +170,6 @@ namespace PS3_SPRX_Loader {
                 while (PS3.Ext.ReadUInt64(INSTALL_ADDR) == 0)
                     Thread.Sleep(1);
                 
-                Thread.Sleep(50);
-                
                 PS3.MainThreadStop();
                 
                 for (uint i = 0; i < 0x49; i++) {

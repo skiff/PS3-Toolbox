@@ -114,7 +114,6 @@
             this.hexBox1 = new Be.Windows.Forms.HexBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.label13 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -1034,15 +1033,6 @@
             this.linkLabel2.Text = "Sabotage GitHub";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
-            // label13
-            // 
-            this.label13.Location = new System.Drawing.Point(233, 407);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(268, 23);
-            this.label13.TabIndex = 25;
-            this.label13.Text = "No Process Attached";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(299, 12);
@@ -1057,9 +1047,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 438);
+            this.ClientSize = new System.Drawing.Size(513, 435);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.label13);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.tabControl1);
@@ -1154,7 +1143,6 @@
         private System.Windows.Forms.ComboBox comboBox8;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.Button injectOpCodesBtn;

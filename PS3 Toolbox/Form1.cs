@@ -87,7 +87,6 @@ namespace PS3_SPRX_Loader {
                     refreshModules();
 
                     label1.Text = "Current Game: " + PS3.GetCurrentGame();
-                    label13.Text = TMAPI.Parameters.Info;
                 }
             }
             catch {
@@ -99,7 +98,6 @@ namespace PS3_SPRX_Loader {
             dataGridView1.Rows.Clear();
 
             label1.Text = "Current Game: No Game Detected";
-            label13.Text = "No Process Attached";
         }
 
         private void refreshModules() {
@@ -289,10 +287,6 @@ namespace PS3_SPRX_Loader {
 
             uint address = Convert.ToUInt32(textBox22.Text, 16);
             PS3.SetMemory(address, MemoryData);
-        }
-
-        private void button1_Click(object sender, EventArgs e) {
-            PS3RPC.Install();
         }
     }
 }
