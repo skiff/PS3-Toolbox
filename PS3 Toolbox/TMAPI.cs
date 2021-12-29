@@ -108,6 +108,7 @@ namespace PS3_SPRX_Loader {
         public bool ConnectTarget() {
             bool result = false;
             result = PS3TMAPI.SUCCEEDED(PS3TMAPI.InitTargetComms());
+            result = PS3TMAPI.SUCCEEDED(PS3TMAPI.GetDefaultTarget(out Target));
             result = PS3TMAPI.SUCCEEDED(PS3TMAPI.Connect(Target, null));
             IsConnected = result;
             return result;
