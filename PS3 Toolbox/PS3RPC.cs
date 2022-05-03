@@ -152,7 +152,7 @@ namespace PS3_SPRX_Loader {
                     return true;
                 }
 
-                PS3.SetMemory(RPC_BASE, new byte[0x1B0]);
+                PS3.SetMemory(RPC_BASE, new byte[0x100]);
 
                 ulong PC = 0;
                 ulong[] Registers = new ulong[0x49];
